@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+ {% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+
+{% block content %}
+<div class="div">
+	<div class="row">
+
+
+        <div class="col-md-12">
+        <h4>Liste Candidats</h4>
+        <div class="table-responsive">
+
+
+              <table id="mytable" class="table table-bordred table-striped">
+
+                   <thead>
+
+                   <th>Nom</th>
+                    <th>Prenom</th>
+                     <th>Num Tel</th>
+                   <th>Statut Email</th>
+                     <th>Etat</th>
+                      <th>Action</th>
+
+                       <th>Edit</th>
+                   </thead>
+    <tbody>
+{% for item in page_obj %}
+    <tr>
+        <td>{{ item.nom }}</td>
+        <td>{{ item.prenom }}</td>
+        <td>{{ item.num_tel }}</td>
+    <td>{{ item.status_email }}</td>
+    <td>{{ item.etat }}</td>
+     <td>   <a href="profile/{{item.id}}/3"> <button   type="button" class="btn btn-danger"><span class="glyphicon glyphicon-pencil"></span> rejeter</button></a>
+
+                        <a href="profile/{{item.id}}/1"><button type="button" class="btn btn-primary">  <span class="glyphicon glyphicon-ok"></span>en cour</button></a>
+
+         <a href="profile/{{item.id}}/2"><button type="button" class="btn btn-success">confirmer </button></a></td>
+
+    <td><a data-placement="top" data-toggle="tooltip" href="update/{{item.id}}" title="Edit"><button role="button" class="btn btn-outline-info btn-lg btn-iconed btn-rounded">
+            <i class="typcn typcn-pin"></i> <span class="spn">Edit</span>
+         </button><span class="glyphicon glyphicon-pencil"></span></a></td>
+    <td><a data-placement="top" data-toggle="tooltip"href="profile/{{item.id}}/4" ><button role="button" class="btn btn-outline-success btn-lg btn-iconed btn-rounded">
+            <i class="typcn typcn-warning"></i> <span class="spn">Consulter</span>
+         <span class="glyphicon glyphicon-trash"></span></button></a></td>
+    </tr>
+    {% endfor %}
+
+
+
+
+
+    </tbody>
+
+</table>
+{% for case in page_obj %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}<br>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

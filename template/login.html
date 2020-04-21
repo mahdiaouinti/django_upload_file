@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'accounts.css' %}">
+<!------ Include the above in your HEAD tag ---------->
+
+{% block content %}
+
+<form name="login-form" class="login-form" action="" method="post">
+
+		<div class="header">
+		<h1>Welcome to this Site</h1>
+		</div>
+	{% csrf_token %}
+
+		<div class="content">
+		<input name="username" type="text" class="input username" placeholder="Username" />
+		<div class="user-icon"></div>
+		<input name="password" type="password" class="input password" placeholder="Password" />
+		<div class="pass-icon"></div>
+		</div>
+
+		<div class="footer">
+		<input type="submit" class="button">
+		</div>
+
+	</form>
+{% endblock  %}
